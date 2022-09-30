@@ -31,5 +31,33 @@ class TestController extends Controller
             'response' => $sorted_word 
         ]);
     }
-    
+
+    function divideNumber(Request $request){
+        $num=$request->num;
+        //check if input is integer
+        if(is_numeric($num)){
+            $number=$num;
+            $power=0;
+            $numbers = array();
+
+            //loop over each digit of the number
+            do{
+                $digit=$num % 10;
+                array_push($numbers, $digit * pow(10,$power));
+                $power++;
+            }
+            while($num=(int)($num/10));
+
+            $reversed_number=array_reverse($numbers);
+
+            return response()->json([
+                'status' => 'yes',
+                'number' => $number,
+                'response' => $reversed_number
+            ]);
+        }
+    }        
 }
+
+
+

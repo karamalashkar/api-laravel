@@ -6,6 +6,8 @@ use App\Http\Controllers\TestController;
 
 Route::get("/sort/{word}",[TestController::class,'sortString']);
 
+Route::get("/number/{num}",[TestController::class,'divideNumber']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
