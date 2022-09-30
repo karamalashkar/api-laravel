@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hamcrest\Type\IsNumeric;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -56,7 +57,32 @@ class TestController extends Controller
                 'response' => $reversed_number
             ]);
         }
-    }        
+    }
+    
+    function decimalToBinary(Request $request){
+        $text=$request->text;
+
+        $delimiter=' ';
+        $words=explode($delimiter,$text);
+        $response='';
+
+        //adding each word to new string by converting each number to binary
+        foreach($words as $word){
+            if(is_numeric($word)){
+                $binary=decbin($word);
+                $word=$binary;
+            }
+            
+            $response.=$word.' ';    
+        }
+
+        return response()->json([
+            'status' => 'yes',
+            'text' => $text,
+            'response' => $response
+        ]);
+        
+    }
 }
 
 
