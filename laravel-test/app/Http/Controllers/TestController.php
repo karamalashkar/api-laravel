@@ -83,6 +83,37 @@ class TestController extends Controller
         ]);
         
     }
+
+    function prefixNotation(Request $request){
+        $operation=$request->operation;
+
+        $response='';
+
+        $elements=explode(' ',$operation);
+
+        //check the type of operator 
+        if($elements[0]=='+'){
+            $response=$elements[1] + $elements[2];
+        }
+        else if($elements[0]=='-'){
+            $response=$elements[1] - $elements[2];
+        }
+        else if($elements[0]=='*'){
+            $response=$elements[1] * $elements[2];
+        }
+        else if($elements[0]=='%'){
+            $response=$elements[1] % $elements[2];
+        }
+        else{
+            $response="no response";
+        }
+
+        return response()->json([
+            'status' => 'yes',
+            'operation' => $operation,
+            'response' => $response
+        ]);
+    }
 }
 
 
